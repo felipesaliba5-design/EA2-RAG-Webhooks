@@ -1,0 +1,511 @@
+{
+  "name": "EduBot EA2
+   - RAG e Webhooks",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}",
+        "options": {
+          "systemMessage": "1. IDENTIDADE E FUNÇÃO\nVocê é o EduBot, o assistente virtual oficial da plataforma de cursos online DevAcademy. Sua função principal é tirar dúvidas de alunos sobre o cronograma de aulas, entrega de trabalhos e navegação na plataforma.\n\n2. CENÁRIO E DOMÍNIO DE ATUAÇÃO\nContexto: Atendimento automatizado integrado via WhatsApp/Web para alunos matriculados nos bootcamps da DevAcademy.\nPúblico-Alvo: Estudantes de tecnologia, iniciantes e profissionais em migração de carreira.\nDomínio: Datas de aulas, regras de envio de projetos, links de acesso e suporte básico de login.\n\n3. TOM DE VOZ E ESTILO DE INTERAÇÃO\nTom de Voz: Encorajador, amigável, didático e paciente.\nInstruções de Estilo:\n\nResponda em no máximo 3 parágrafos curtos.\n\nUse emojis com moderação para tornar a conversa acolhedora.\n\nSempre saude o aluno pelo nome quando a informação estiver disponível no contexto.\n\n4. ORIENTAÇÕES, DIRETRIZES E RESTRIÇÕES\nDiretrizes:\n\nUSO DE FERRAMENTAS: NUNCA diga ao aluno frases como \"vou verificar e já retorno\" ou \"um momento\". Você DEVE consultar a base de dados (Tool) imediatamente e entregar a resposta final na mesma mensagem.\n\nINFORMAÇÃO INCOMPLETA: Se o aluno perguntar sobre prazos ou aulas, mas não especificar o nome do curso ou módulo, você é OBRIGADO a perguntar de qual curso ele está falando ANTES de tentar consultar a base de dados.\n\nSUPORTE DE TI: Se o aluno relatar problemas técnicos complexos exclusivos da plataforma (como erros 500, tela em branco, botões que sumiram), colete o e-mail dele e informe que a equipe de TI entrará em contato. A equipe de TI deve ser acionada EXCLUSIVAMENTE para bugs da plataforma.\n\nRestrições (OBRIGATÓRIO):\n\nNUNCA responda dúvidas de código, lógica ou programação que fazem parte das avaliações do curso. Não dê dicas de sintaxe nem tente explicar a causa do erro de código do aluno.\n\nNUNCA ofereça para encaminhar dúvidas de código para a equipe de TI.\n\nNÃO prometa extensão de prazos de entrega de trabalhos sob nenhuma circunstância.\n\nNÃO compartilhe contatos pessoais de professores.\n\n5. OBJETIVO FINAL DA INTERAÇÃO\nGarantir que o aluno resolva suas dúvidas operacionais de forma rápida na mesma interação, diminuindo a carga de chamados do suporte humano e mantendo o aluno engajado no curso."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -180,
+        220
+      ],
+      "id": "5e345d9d-47bd-4a24-8a82-f7c749bc1c81",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -180,
+        360
+      ],
+      "id": "a0511cd3-bbe3-4399-bc25-c310c7667baa",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "oBg65ZbObh0Cc81u",
+          "name": "OpenAi account 22"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.sessionId }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -80,
+        380
+      ],
+      "id": "85eb54c3-3c55-414f-afdb-2289e6d9829f",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        40,
+        540
+      ],
+      "id": "f311fbb6-9047-442e-a665-9eaf7f2f83d5",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "oBg65ZbObh0Cc81u",
+          "name": "OpenAi account 22"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "get",
+        "owner": {
+          "__rl": true,
+          "value": "felipesaliba5-design",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "Constru-o-da-Base-Documental-do-Agente-de-IA",
+          "mode": "name"
+        },
+        "filePath": "json Agente de IA",
+        "asBinaryProperty": false,
+        "additionalParameters": {}
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        -180,
+        -140
+      ],
+      "id": "d6bc515b-52d7-4a92-9e13-e71f8ae348cd",
+      "name": "GitHub",
+      "webhookId": "6222982e-4224-450d-8fc6-6890118b61b5",
+      "credentials": {
+        "githubApi": {
+          "id": "58iHrK5gmLHxzgnK",
+          "name": "GitHub account 17"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{$json[\"link_pdf\"]}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        100,
+        -140
+      ],
+      "id": "8fbc2a75-dce6-4258-8884-3d503d4614ba",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        240,
+        -140
+      ],
+      "id": "34a705f8-7187-4916-adc7-ef884235684d",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1) Coletores: aceita tanto entrada como array de itens do nódulo anterior\n//    quanto um único item cujo JSON seja um array.\nlet docs = $input.all().map(i => i.json);\nif (Array.isArray(docs[0])) docs = docs[0]; // desembrulha se veio como array dentro de um único item\n\n// 2) Pequena limpeza opcional do texto\nconst clean = (s='') =>\n  s.replace(/\\u00ad/g, '')           // remove soft-hyphen\n   .replace(/[ \\t]+\\n/g, '\\n')       // tira espaços antes de quebra de linha\n   .replace(/\\n{3,}/g, '\\n\\n');      // colapsa múltiplas quebras\n\n// 3) Chunking simples (ajuste size/overlap conforme seu embedder)\nfunction chunkText(text, size = 1000, overlap = 150) {\n  const out = [];\n  let i = 0;\n  while (i < text.length) {\n    const end = Math.min(i + size, text.length);\n    out.push(text.slice(i, end));\n    if (end === text.length) break;\n    i = Math.max(0, end - overlap);\n  }\n  return out;\n}\n\n// 4) Mapeia cada PDF -> vários itens (um por chunk) no formato que o SVS espera\nconst out = [];\nfor (const d of docs) {\n  const fullText = clean(d.text || '');\n  const chunks = chunkText(fullText, 1000, 150);\n\n  // tenta achar autor/título nas chaves disponíveis\n  const author = d.info?.Author || (Array.isArray(d.metadata?.['dc:creator']) ? d.metadata['dc:creator'][0] : undefined);\n  const created = d.info?.CreationDate || d.metadata?.['xmp:createdate'];\n\n  chunks.forEach((c, idx) => {\n    out.push({\n      json: {\n        text: c,\n        metadata: {\n          // se você estiver carregando o link_pdf desde passos anteriores, faça merge antes e preencha aqui:\n          // source: $json.link_pdf,\n          pages: d.numpages,\n          pdf_version: d.info?.PDFFormatVersion,\n          author,\n          created,\n          extractor_version: d.version,\n          chunk: idx + 1\n        }\n      }\n    });\n  });\n}\n\nreturn out;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        380,
+        -140
+      ],
+      "id": "eed5ca6e-7f05-4b45-a4a0-86c0f33d93f3",
+      "name": "Chunk"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Pega o conteúdo codificado em base64 do GitHub e converte para texto UTF-8\nconst raw = Buffer.from($input.first().json.content, 'base64').toString('utf-8');\n\n// Converte o texto em um array JSON\nconst data = JSON.parse(raw);\n\n// Como o seu JSON é uma lista direta de itens, usamos o .map() direto na variável 'data'\nreturn data.map((a, i) => ({\n  json: {\n    id: i + 1,\n    titulo: a.titulo,\n    autor: a.autor,\n    ano: a.ano,\n    link_pdf: a.url_pdf\n  }\n}));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -40,
+        -140
+      ],
+      "id": "ccc083d1-7b5d-4118-bcb0-8788efbb3657",
+      "name": "Code - Converte JSON",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        700,
+        40
+      ],
+      "id": "5bff2cac-cf26-435f-b862-973079d6b949",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        540,
+        20
+      ],
+      "id": "5173b33f-2b9f-4c94-8de9-31864a24a5fa",
+      "name": "Embeddings OpenAI Upsert",
+      "credentials": {
+        "openAiApi": {
+          "id": "oBg65ZbObh0Cc81u",
+          "name": "OpenAi account 22"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        -140
+      ],
+      "id": "5fb067ee-2d39-46f8-bc56-c365bf9b600a",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "tableName": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "list",
+          "cachedResultName": "documents"
+        },
+        "options": {
+          "queryName": "match_documents"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.3,
+      "position": [
+        540,
+        -140
+      ],
+      "id": "3322a083-c43f-41b5-ab05-02824df98c6a",
+      "name": "Supabase Vector Store",
+      "credentials": {
+        "supabaseApi": {
+          "id": "91Qktd6J54jnhV9V",
+          "name": "Supabase account 8"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Possui conhecimento sobre artigos relativos a Agentes de IA",
+        "tableName": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "list",
+          "cachedResultName": "documents"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.3,
+      "position": [
+        20,
+        420
+      ],
+      "id": "0787b4b4-b897-43dd-9d11-a15b1a838dbb",
+      "name": "Supabase Vector Store1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "91Qktd6J54jnhV9V",
+          "name": "Supabase account 8"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "/chat",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -520,
+        220
+      ],
+      "id": "9fcb3f67-1175-43bf-8488-7870ed7931e7",
+      "name": "Webhook",
+      "webhookId": "4aeb85d6-4951-423e-852b-454342eb2e4f"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        200,
+        220
+      ],
+      "id": "4add159d-b8ac-4bbc-a426-e5b04f557d99",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d3fe1a8c-e674-4700-ac6d-5a80f3acce8d",
+              "name": "chatInput",
+              "value": "={{ $json.body.message }}",
+              "type": "string"
+            },
+            {
+              "id": "0b2af7ae-fddc-4f4d-8e7c-621bdccc1b2f",
+              "name": "sessionId",
+              "value": "={{ $json.body.session_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": false
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -360,
+        220
+      ],
+      "id": "e7883db9-a73b-4147-b2b3-9823c7af3e43",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GitHub": {
+      "main": [
+        [
+          {
+            "node": "Code - Converte JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Chunk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code - Converte JSON": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chunk": {
+      "main": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI Upsert": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "GitHub",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Vector Store1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e037e038-ccca-40a2-a790-2f138c596cc3",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "2ef09b3ff7c0d13f07784f5a16ad0714adec809b2e8496f0ab7a6deb36f32a14"
+  },
+  "id": "CCG4PKjYXXk7NPeO",
+  "tags": []
+}
+

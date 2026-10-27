@@ -1,0 +1,323 @@
+================================================================================
+RELATÓRIO DE ENTREGA - EA2: PROJETO DE RAG E WEBHOOKS
+Evolução do Agente de IA com Base de Conhecimento Vetorial e Interface HTTP
+================================================================================
+
+1. IDENTIFICAÇÃO DO PROJETO
+--------------------------------------------------------------------------------
+Título do Projeto: Evolução do Agente de IA com RAG e Webhooks HTTP
+Identificação da Atividade: EA2 - Projeto de RAG e Webhooks
+Nome do Agente: EduBot EA3
+Autor / Aluno: Felipe Saliba
+Repositório / Conta GitHub: felipesaliba5-design
+Ambiente de Execução: n8n Workflow Automation Platform
+Tecnologias Integradas: n8n, OpenAI (gpt-4o-mini / Embeddings), Supabase (pgvector), GitHub API
+
+
+2. LINKS DE ACESSO E EXECUÇÃO
+--------------------------------------------------------------------------------
+• Link do Repositório do Projeto no GitHub:
+  https://github.com/felipesaliba5-design/EA2-RAG-Webhooks
+
+• Link da Base Documental Utilizada no RAG (JSON com Metadados e Links de PDFs):
+  https://github.com/felipesaliba5-design/Constru-o-da-Base-Documental-do-Agente-de-IA/blob/main/json%20Agente%20de%20IA
+  (Versão Raw): https://raw.githubusercontent.com/felipesaliba5-design/Constru-o-da-Base-Documental-do-Agente-de-IA/main/json%20Agente%20de%20IA
+
+• Link do Arquivo do Workflow n8n para Importação (workflow_edubot_rag_webhook.json):
+  https://github.com/felipesaliba5-design/EA2-RAG-Webhooks/blob/main/workflow_edubot_rag_webhook.json
+
+
+3. VISÃO GERAL E EVOLUÇÃO A PARTIR DA EA1
+--------------------------------------------------------------------------------
+Na etapa EA1, o agente inteligente operava primordialmente baseado em diretrizes
+de prompt estáticas (persona EduBot) e com memória isolada no chat.
+
+Na presente etapa (EA2), o sistema evoluiu estruturalmente em dois pilares centrais:
+
+1. Base de Conhecimento Dinâmica com RAG (Retrieval-Augmented Generation):
+   - Ingestão automatizada de artigos científicos e técnicos sobre Agentes de IA a
+     partir de um catálogo JSON hospedado no GitHub.
+   - Extração do texto de arquivos PDF, divisão em fragmentos (chunking) com
+     preservação de metadados (autor, ano, páginas).
+   - Geração de embeddings semânticos vetoriais via OpenAI.
+   - Armazenamento em banco de dados relacional com extensão vetorial (Supabase / pgvector).
+   - Disponibilização da base como uma Tool (ferramenta) para o agente LangChain no n8n.
+
+2. Disponibilização como Serviço HTTP (Webhook):
+   - O agente passou a ser um serviço de backend acessível por qualquer aplicação externa
+     (aplicativos web, WhatsApp bots, front-ends React/Vue, integrações corporativas).
+   - Utilização do nó Webhook do n8n com método POST na rota `/chat`.
+   - Gerenciamento de sessões conversacionais via `session_id`, garantindo memória contextual
+     individualizada por usuário.
+   - Retorno síncrono e estruturado em JSON através do nó Respond to Webhook.
+
+
+4. ESPECIFICAÇÃO DA API HTTP (COMUNICAÇÃO EXTERNA)
+--------------------------------------------------------------------------------
+A integração com o agente é feita via protocolo HTTP/REST, permitindo comunicação
+assíncrona ou síncrona com qualquer cliente HTTP.
+
+4.1. Endpoints do Serviço:
+  • Modo Produção:
+    URL: POST https://<sua-instancia-n8n>/webhook/chat
+  • Modo Teste / Desenvolvimento:
+    URL: POST https://<sua-instancia-n8n>/webhook-test/chat
+
+4.2. Cabeçalhos HTTP (Headers):
+  Content-Type: application/json
+
+4.3. Estrutura do Payload de Entrada (Request Body):
+  {
+    "message": "Qual é a definição de agentes autônomos apresentada nos artigos?",
+    "session_id": "sessao-aluno-12345"
+  }
+
+  Parâmetros:
+  - `message` (string, obrigatório): Pergunta ou comando enviado pelo usuário.
+  - `session_id` (string, obrigatório): Identificador único da sessão para retenção de memória.
+
+4.4. Mapeamento Interno no n8n (Nó "Edit Fields"):
+  - `chatInput` = {{ $json.body.message }}
+  - `sessionId` = {{ $json.body.session_id }}
+
+4.5. Estrutura do Payload de Resposta (Response Body):
+  {
+    "output": "De acordo com os artigos da base de conhecimento, agentes autônomos são sistemas de software baseados em IA projetados para perceber seu ambiente, tomar decisões e executar ações direcionadas a objetivos específicos..."
+  }
+
+4.6. Exemplos de Consumo Externo:
+
+• Exemplo via cURL:
+curl -X POST "http://localhost:5678/webhook/chat" \
+     -H "Content-Type: application/json" \
+     -d '{"message": "O que os artigos dizem sobre arquiteturas de agentes?", "session_id": "user-001"}'
+
+• Exemplo via PowerShell:
+$body = @{
+    message = "O que os artigos dizem sobre arquiteturas de agentes?"
+    session_id = "user-001"
+} | ConvertTo-Json
+Invoke-RestMethod -Uri "http://localhost:5678/webhook/chat" -Method Post -ContentType "application/json" -Body $body
+
+• Exemplo via Python (requests):
+import requests
+
+url = "http://localhost:5678/webhook/chat"
+payload = {
+    "message": "O que os artigos dizem sobre arquiteturas de agentes?",
+    "session_id": "user-001"
+}
+response = requests.post(url, json=payload)
+print(response.json())
+
+
+5. ARQUITETURA DETALHADA DO WORKFLOW NO N8N
+--------------------------------------------------------------------------------
+O workflow é composto por dois fluxos interligados na mesma automação:
+
+[FLUXO A: PIPELINE DE INGESTÃO E INDEXAÇÃO RAG]
+  1. Manual Trigger ("When clicking 'Execute workflow'"):
+     Dispara o processo de atualização/ingestão da base documental sob demanda.
+  2. GitHub Node:
+     Conecta ao repositório 'Constru-o-da-Base-Documental-do-Agente-de-IA' e recupera o
+     arquivo 'json Agente de IA'.
+  3. Code Node ("Code - Converte JSON"):
+     Decodifica o conteúdo em Base64 para UTF-8 e converte a lista de artigos contendo
+     título, autor, ano e URL do PDF.
+  4. HTTP Request Node:
+     Faz o download do binário de cada arquivo PDF através do link fornecido (`link_pdf`).
+  5. Extract from File Node:
+     Extrai o texto integral contido nos arquivos PDF.
+  6. Code Node ("Chunk"):
+     Segmenta o texto extraído em blocos de 1000 caracteres com sobreposição (overlap) de
+     150 caracteres, preservando metadados fundamentais (número de páginas, versão, autor,
+     data de criação e índice do chunk).
+  7. Supabase Vector Store (Modo Insert):
+     - Recebe os chunks gerados.
+     - Gera os vetores de embedding através do nó Embeddings OpenAI Upsert.
+     - Armazena o conteúdo, os metadados e os vetores na tabela 'documents' do Supabase.
+
+[FLUXO B: PIPELINE DE ATENDIMENTO HTTP E AGENTE INTELIGENTE]
+  1. Webhook Node:
+     Recebe as requisições POST externas no caminho `/chat`.
+  2. Edit Fields Node:
+     Normaliza o corpo da requisição, extraindo `message` e `session_id`.
+  3. AI Agent (LangChain Agent):
+     - Modelo de Linguagem: OpenAI Chat Model (gpt-4o-mini).
+     - Memória: Simple Memory (Buffer Window de 10 mensagens indexadas pelo sessionId).
+     - Ferramenta (Tool): Supabase Vector Store1 configurado em modo 'retrieve-as-tool'
+       com a descrição: "Possui conhecimento sobre artigos relativos a Agentes de IA".
+     - Prompt de Sistema: Persona EduBot da DevAcademy, com regras estritas de atendimento,
+       consulta imediata à base vetorial e restrições operacionais.
+  4. Respond to Webhook Node:
+     Encaminha a resposta sintetizada do AI Agent de volta para a aplicação cliente HTTP.
+
+
+6. CÓDIGOS FONTE E SCRIPTS DE SUPORTE
+--------------------------------------------------------------------------------
+
+6.1. Script de Criação do Banco Vetorial (Supabase / PostgreSQL + pgvector):
+--------------------------------------------------------------------------------
+CREATE EXTENSION IF NOT EXISTS vector;
+
+CREATE TABLE IF NOT EXISTS documents (
+    id BIGSERIAL PRIMARY KEY,
+    content TEXT NOT NULL,
+    metadata JSONB,
+    embedding VECTOR(1536)
+);
+
+CREATE INDEX IF NOT EXISTS documents_embedding_hnsw_idx 
+ON documents 
+USING hnsw (embedding vector_cosine_ops);
+
+CREATE OR REPLACE FUNCTION match_documents (
+    query_embedding VECTOR(1536),
+    match_count INT DEFAULT 5,
+    filter JSONB DEFAULT '{}'
+)
+RETURNS TABLE (
+    id BIGINT,
+    content TEXT,
+    metadata JSONB,
+    similarity FLOAT
+)
+LANGUAGE plpgsql
+AS $$
+#variable_conflict use_column
+BEGIN
+    RETURN QUERY
+    SELECT
+        d.id,
+        d.content,
+        d.metadata,
+        1 - (d.embedding <=> query_embedding) AS similarity
+    FROM documents d
+    WHERE d.metadata @> filter
+    ORDER BY d.embedding <=> query_embedding
+    LIMIT match_count;
+END;
+$$;
+
+
+6.2. Código JavaScript do Nó "Code - Converte JSON" (n8n):
+--------------------------------------------------------------------------------
+const raw = Buffer.from($input.first().json.content, 'base64').toString('utf-8');
+const data = JSON.parse(raw);
+
+return data.map((a, i) => ({
+  json: {
+    id: i + 1,
+    titulo: a.titulo,
+    autor: a.autor,
+    ano: a.ano,
+    link_pdf: a.url_pdf
+  }
+}));
+
+
+6.3. Código JavaScript do Nó "Chunk" (n8n):
+--------------------------------------------------------------------------------
+let docs = $input.all().map(i => i.json);
+if (Array.isArray(docs[0])) docs = docs[0];
+
+const clean = (s='') =>
+  s.replace(/\u00ad/g, '')
+   .replace(/[ \t]+\n/g, '\n')
+   .replace(/\n{3,}/g, '\n\n');
+
+function chunkText(text, size = 1000, overlap = 150) {
+  const out = [];
+  let i = 0;
+  while (i < text.length) {
+    const end = Math.min(i + size, text.length);
+    out.push(text.slice(i, end));
+    if (end === text.length) break;
+    i = Math.max(0, end - overlap);
+  }
+  return out;
+}
+
+const out = [];
+for (const d of docs) {
+  const fullText = clean(d.text || '');
+  const chunks = chunkText(fullText, 1000, 150);
+
+  const author = d.info?.Author || (Array.isArray(d.metadata?.['dc:creator']) ? d.metadata['dc:creator'][0] : undefined);
+  const created = d.info?.CreationDate || d.metadata?.['xmp:createdate'];
+
+  chunks.forEach((c, idx) => {
+    out.push({
+      json: {
+        text: c,
+        metadata: {
+          pages: d.numpages,
+          pdf_version: d.info?.PDFFormatVersion,
+          author,
+          created,
+          extractor_version: d.version,
+          chunk: idx + 1
+        }
+      }
+    });
+  });
+}
+
+return out;
+
+
+6.4. Prompt de Sistema do AI Agent (Persona EduBot EA3):
+--------------------------------------------------------------------------------
+1. IDENTIDADE E FUNÇÃO
+Você é o EduBot, o assistente virtual oficial da plataforma de cursos online DevAcademy. Sua função principal é tirar dúvidas de alunos sobre o cronograma de aulas, entrega de trabalhos e navegação na plataforma.
+
+2. CENÁRIO E DOMÍNIO DE ATUAÇÃO
+Contexto: Atendimento automatizado integrado via WhatsApp/Web para alunos matriculados nos bootcamps da DevAcademy.
+Público-Alvo: Estudantes de tecnologia, iniciantes e profissionais em migração de carreira.
+Domínio: Datas de aulas, regras de envio de projetos, links de acesso e suporte básico de login.
+
+3. TOM DE VOZ E ESTILO DE INTERAÇÃO
+Tom de Voz: Encorajador, amigável, didático e paciente.
+Instruções de Estilo:
+Responda em no máximo 3 parágrafos curtos.
+Use emojis com moderação para tornar a conversa acolhedora.
+Sempre saude o aluno pelo nome quando a informação estiver disponível no contexto.
+
+4. ORIENTAÇÕES, DIRETRIZES E RESTRIÇÕES
+Diretrizes:
+USO DE FERRAMENTAS: NUNCA diga ao aluno frases como "vou verificar e já retorno" ou "um momento". Você DEVE consultar a base de dados (Tool) imediatamente e entregar a resposta final na mesma mensagem.
+INFORMAÇÃO INCOMPLETA: Se o aluno perguntar sobre prazos ou aulas, mas não especificar o nome do curso ou módulo, você é OBRIGADO a perguntar de qual curso ele está falando ANTES de tentar consultar a base de dados.
+SUPORTE DE TI: Se o aluno relatar problemas técnicos complexos exclusivos da plataforma (como erros 500, tela em branco, botões que sumiram), colete o e-mail dele e informe que a equipe de TI entrará em contato. A equipe de TI deve ser acionada EXCLUSIVAMENTE para bugs da plataforma.
+
+Restrições (OBRIGATÓRIO):
+NUNCA responda dúvidas de código, lógica ou programação que fazem parte das avaliações do curso. Não dê dicas de sintaxe nem tente explicar a causa do erro de código do aluno.
+NUNCA ofereça para encaminhar dúvidas de código para a equipe de TI.
+NÃO prometa extensão de prazos de entrega de trabalhos sob nenhuma circunstância.
+NÃO compartilhe contatos pessoais de professores.
+
+5. OBJETIVO FINAL DA INTERAÇÃO
+Garantir que o aluno resolva suas dúvidas operacionais de forma rápida na mesma interação, diminuindo a carga de chamados do suporte humano e mantendo o aluno engajado no curso.
+
+
+7. PROCEDIMENTO PARA REPRODUÇÃO E EXECUÇÃO
+--------------------------------------------------------------------------------
+1. No Supabase:
+   - Abra o SQL Editor da sua instância Supabase e execute o script `supabase_setup.sql`.
+   - Certifique-se de que a extensão `vector` e a tabela `documents` foram criadas com sucesso.
+
+2. No n8n:
+   - Importe o arquivo JSON `workflow_edubot_rag_webhook.json` (Menu -> Import from File).
+   - Configure as Credenciais:
+     a) GitHub API: com token pessoal de leitura.
+     b) OpenAI API: com chave de API válida (usada para o chat gpt-4o-mini e para embeddings).
+     c) Supabase API: com URL do projeto e Service Role / API Key.
+   - Execute o nó manual ("When clicking 'Execute workflow'") uma vez para disparar a ingestão dos documentos no Supabase Vector Store.
+   - Ative o workflow no n8n (toggle "Active" = ON) para que o Webhook fique disponível publicamente.
+
+3. Teste da Comunicação HTTP:
+   - Execute o script Python `test_webhook.py` ou comando cURL apontando para o endpoint gerado pelo n8n.
+   - Verifique o recebimento da resposta sintetizada pelo EduBot com base nos documentos vetoriais e regras de persona.
+
+================================================================================
+FIM DO DOCUMENTO DE ENTREGA
+================================================================================

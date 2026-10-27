@@ -1,0 +1,500 @@
+[
+  {
+    "titulo": "Cronograma Oficial - Bootcamp Front-End (React)",
+    "autor": "Equipe Pedagógica DevAcademy",
+    "ano": 2026,
+    "url_pdf": "https://drive.google.com/uc?export=download&id=1lyj0L7jImaQTnqC773vqyPYdtS8UGSDE",
+    "resumo": "Apresenta o cronograma detalhado do módulo de React, listando as datas das aulas, ferramentas utilizadas e a data limite para entrega do projeto final, além de formalizar a regra de não extensão de prazos.",
+    "data_insercao": "2026-08-31T18:00:00.000Z",
+    "status": "Pendente",
+    "embedding_status": "pending",
+    "metadata": {
+      "tema": [
+        "cronograma",
+        "prazos",
+        "react",
+        "regras"
+      ],
+      "nivel": "basico",
+      "idioma": "pt",
+      "contexto_educacional": "formacao_profissional",
+      "tipo_documento": "guia",
+      "fonte": "docs.google.com",
+      "licenca": "open_access"
+    }
+  },
+  {
+    "titulo": "Cronograma Oficial - Bootcamp Back-End (Node.js)",
+    "autor": "Equipe Pedagógica DevAcademy",
+    "ano": 2026,
+    "url_pdf": "https://drive.google.com/uc?export=download&id=1MbzAlGre5_4zNIk84nmOE9Mk0MlRBFiz",
+    "resumo": "Apresenta o cronograma detalhado do módulo de Node.js, listando as datas das aulas de back-end, ferramentas utilizadas e a data limite de 13/11/2026 para entrega do projeto final da API, reafirmando as regras de não prorrogação de prazos.",
+    "data_insercao": "2026-08-31T18:05:00.000Z",
+    "status": "Pendente",
+    "embedding_status": "pending",
+    "metadata": {
+      "tema": [
+        "cronograma",
+        "prazos",
+        "nodejs",
+        "backend",
+        "regras"
+      ],
+      "nivel": "basico",
+      "idioma": "pt",
+      "contexto_educacional": "formacao_profissional",
+      "tipo_documento": "guia",
+      "fonte": "docs.google.com",
+      "licenca": "open_access"
+    }
+  },
+  {
+    "titulo": "Calendário Acadêmico Institucional - 2026",
+    "autor": "Secretaria Acadêmica DevAcademy",
+    "ano": 2026,
+    "url_pdf": "https://drive.google.com/uc?export=download&id=1tq8ERzIomult6hwsVlTkwYHx-uUccVl2",
+    "resumo": "Fornece a visão geral do ano letivo de 2026, listando datas de matrículas, feriados em que não há aulas ao vivo, e os prazos finais de todos os bootcamps vigentes, essencial para o agente balizar as dúvidas de datas dos alunos.",
+    "data_insercao": "2026-08-31T18:10:00.000Z",
+    "status": "Pendente",
+    "embedding_status": "pending",
+    "metadata": {
+      "tema": [
+        "calendario",
+        "datas",
+        "feriados",
+        "prazos"
+      ],
+      "nivel": "basico",
+      "idioma": "pt",
+      "contexto_educacional": "formacao_profissional",
+      "tipo_documento": "regulamento",
+      "fonte": "docs.google.com",
+      "licenca": "open_access"
+    }
+  },
+  {
+    "titulo": "Política de Prazos e Entregas de Projetos",
+    "autor": "Coordenação de Ensino DevAcademy",
+    "ano": 2026,
+    "url_pdf": "https://drive.google.com/uc?export=download&id=1uGep9FVqt0LB2C851_YqxEaCTELyjqcQ",
+    "resumo": "Documento normativo que estabelece o fluxo de envio de projetos via GitHub. Ele formaliza a regra de recusa de prorrogação de prazos (mesmo sob insistência) e instrui a acionar a TI apenas em casos de erro na plataforma, isentando o suporte de resolver bugs de código do aluno.",
+    "data_insercao": "2026-08-31T18:15:00.000Z",
+    "status": "Pendente",
+    "embedding_status": "pending",
+    "metadata": {
+      "tema": [
+        "regras",
+        "prazos",
+        "projetos",
+        "suporte",
+        "ti"
+      ],
+      "nivel": "intermediario",
+      "idioma": "pt",
+      "contexto_educacional": "formacao_profissional",
+      "tipo_documento": "norma",
+      "fonte": "docs.google.com",
+      "licenca": "open_access"
+    }
+  },
+  {
+    "titulo": "Regras para Emissão de Certificado de Conclusão",
+    "autor": "Secretaria Acadêmica DevAcademy",
+    "ano": 2026,
+    "url_pdf": "https://drive.google.com/uc?export=download&id=1eFcXQdyTiNeOxNSRY4jElDrZDG0pJaGu",
+    "resumo": "Estabelece os critérios de notas e conclusão de módulos para a obtenção do certificado. Informa a data de liberação (10/12/2026) e orienta sobre falhas na plataforma no momento da emissão, instruindo o agente a coletar o e-mail para suporte de TI.",
+    "data_insercao": "2026-08-31T18:20:00.000Z",
+    "status": "Pendente",
+    "embedding_status": "pending",
+    "metadata": {
+      "tema": [
+        "certificado",
+        "regras",
+        "notas",
+        "suporte",
+        "datas"
+      ],
+      "nivel": "basico",
+      "idioma": "pt",
+      "contexto_educacional": "formacao_profissional",
+      "tipo_documento": "regulamento",
+      "fonte": "docs.google.com",
+      "licenca": "open_access"
+    }
+  },
+  {
+    "titulo": "Manual de Acesso à Plataforma do Aluno",
+    "autor": "Equipe de Experiência do Aluno (UX/UI)",
+    "ano": 2026,
+    "url_pdf": "https://drive.google.com/uc?export=download&id=1-bD1emZZJHEiLhoKfOBjyyWQr0-niq79",
+    "resumo": "Guia que orienta os alunos sobre o primeiro acesso, navegação nos menus principais (como 'Meus Cursos' e 'Entregas') e detalha o procedimento para recuperação de senha. Também define quando falhas como Erro 500 devem ser encaminhadas à equipe de TI via EduBot.",
+    "data_insercao": "2026-08-31T18:25:00.000Z",
+    "status": "Pendente",
+    "embedding_status": "pending",
+    "metadata": {
+      "tema": [
+        "login",
+        "acesso",
+        "plataforma",
+        "suporte",
+        "erros_plataforma"
+      ],
+      "nivel": "basico",
+      "idioma": "pt",
+      "contexto_educacional": "formacao_profissional",
+      "tipo_documento": "manual",
+      "fonte": "docs.google.com",
+      "licenca": "open_access"
+    }
+  },
+  {
+    "titulo": "Guia de Recuperação de Senha e Login",
+    "autor": "Suporte Operacional DevAcademy",
+    "ano": 2026,
+    "url_pdf": "https://drive.google.com/uc?export=download&id=1IF-mhLfLcdrl-9pAFLjCeG8QAkRxdE9K",
+    "resumo": "Detalha o fluxo de redefinição de senha, incluindo regras de validade do link (30 minutos) e bloqueio temporário da conta (15 minutos) após múltiplas tentativas falhas. Reforça o papel do EduBot na coleta de e-mail em caso de Erro 500 na página de login.",
+    "data_insercao": "2026-08-31T18:30:00.000Z",
+    "status": "Pendente",
+    "embedding_status": "pending",
+    "metadata": {
+      "tema": [
+        "login",
+        "senha",
+        "suporte",
+        "acesso",
+        "seguranca"
+      ],
+      "nivel": "basico",
+      "idioma": "pt",
+      "contexto_educacional": "formacao_profissional",
+      "tipo_documento": "guia",
+      "fonte": "docs.google.com",
+      "licenca": "open_access"
+    }
+  },
+  {
+    "titulo": "Como Submeter seu Projeto Final na Plataforma",
+    "autor": "Coordenação Pedagógica e UX/UI",
+    "ano": 2026,
+    "url_pdf": "https://drive.google.com/uc?export=download&id=1LG5O0n8VPjeS9SmV8wH_yAllrT7-a3Ca",
+    "resumo": "Fornece o passo a passo para acessar a aba 'Entregas' e enviar a URL do GitHub. O texto diferencia claramente bugs no código do aluno (que não têm suporte nem extensão de prazo) de bugs na plataforma (onde o EduBot deve coletar o e-mail para acionar a TI).",
+    "data_insercao": "2026-08-31T18:35:00.000Z",
+    "status": "Pendente",
+    "embedding_status": "pending",
+    "metadata": {
+      "tema": [
+        "entregas",
+        "projeto",
+        "github",
+        "prazos",
+        "suporte"
+      ],
+      "nivel": "intermediario",
+      "idioma": "pt",
+      "contexto_educacional": "formacao_profissional",
+      "tipo_documento": "guia",
+      "fonte": "docs.google.com",
+      "licenca": "open_access"
+    }
+  },
+  {
+    "titulo": "Guia de Agendamento de Mentorias Individuais",
+    "autor": "Coordenação de Ensino e Monitoria",
+    "ano": 2026,
+    "url_pdf": "https://drive.google.com/uc?export=download&id=1miLE6NRJURIOhNvw_M-FGnVDVTyM_itL",
+    "resumo": "Orienta os alunos sobre como agendar sessões 1:1, definindo o limite de uma mentoria semanal. Esclarece que mentores ajudam com dúvidas de código, mas não estendem prazos de projetos. Também instrui o EduBot a abrir chamado caso a agenda apresente Erro 500.",
+    "data_insercao": "2026-08-31T18:40:00.000Z",
+    "status": "Pendente",
+    "embedding_status": "pending",
+    "metadata": {
+      "tema": [
+        "mentoria",
+        "codigo",
+        "agendamento",
+        "regras",
+        "suporte"
+      ],
+      "nivel": "basico",
+      "idioma": "pt",
+      "contexto_educacional": "formacao_profissional",
+      "tipo_documento": "guia",
+      "fonte": "docs.google.com",
+      "licenca": "open_access"
+    }
+  },
+  {
+    "titulo": "Guia de Acesso às Gravações das Aulas ao Vivo",
+    "autor": "Coordenação Pedagógica DevAcademy",
+    "ano": 2026,
+    "url_pdf": "https://drive.google.com/uc?export=download&id=1IF-mhLfLcdrl-9pAFLjCeG8QAkRxdE9K",
+    "resumo": "Informa sobre o prazo de 24 horas úteis para disponibilização das gravações das aulas. Orienta o EduBot a abrir chamado caso o player de vídeo apresente Erro 500, e enfatiza que o tempo de espera do vídeo não prorroga prazos de projetos.",
+    "data_insercao": "2026-08-31T18:45:00.000Z",
+    "status": "Pendente",
+    "embedding_status": "pending",
+    "metadata": {
+      "tema": [
+        "gravacoes",
+        "aulas",
+        "video",
+        "prazos",
+        "suporte"
+      ],
+      "nivel": "basico",
+      "idioma": "pt",
+      "contexto_educacional": "formacao_profissional",
+      "tipo_documento": "guia",
+      "fonte": "docs.google.com",
+      "licenca": "open_access"
+    }
+  },
+  {
+    "titulo": "Política de Suporte Técnico e Abertura de Chamados (TI)",
+    "autor": "Infraestrutura e Tecnologia (TI)",
+    "ano": 2026,
+    "url_pdf": "https://drive.google.com/uc?export=download&id=1kh_OjSNI4iUTU0CYvVLxPrfa3CHT2lyX",
+    "resumo": "Define os limites de atuação da TI, focada apenas em erros estruturais (Erro 500, tela em branco). Proíbe estritamente o encaminhamento de dúvidas de código para a TI e instrui o fluxo imediato de coleta de e-mail pelo EduBot em casos válidos.",
+    "data_insercao": "2026-08-31T18:50:00.000Z",
+    "status": "Pendente",
+    "embedding_status": "pending",
+    "metadata": {
+      "tema": [
+        "suporte",
+        "ti",
+        "chamados",
+        "erros_plataforma",
+        "regras"
+      ],
+      "nivel": "intermediario",
+      "idioma": "pt",
+      "contexto_educacional": "formacao_profissional",
+      "tipo_documento": "norma",
+      "fonte": "docs.google.com",
+      "licenca": "open_access"
+    }
+  },
+  {
+    "titulo": "Perguntas Frequentes (FAQ) - Problemas com Vídeos e Erros 500",
+    "autor": "Suporte Operacional e TI",
+    "ano": 2026,
+    "url_pdf": "https://drive.google.com/uc?export=download&id=1BFB2szzepOvoZz0Q4Fojcjj4BjI7xgCp",
+    "resumo": "FAQ focado na distinção de erros de vídeo, Erros 500 da plataforma e Erros 500 no código do aluno. Também instrui os alunos a não fazerem perguntas vagas, forçando a indicação do curso/módulo, e reafirma o papel da TI apenas para falhas de infraestrutura.",
+    "data_insercao": "2026-08-31T18:55:00.000Z",
+    "status": "Pendente",
+    "embedding_status": "pending",
+    "metadata": {
+      "tema": [
+        "faq",
+        "erros_plataforma",
+        "video",
+        "suporte",
+        "codigo"
+      ],
+      "nivel": "intermediario",
+      "idioma": "pt",
+      "contexto_educacional": "formacao_profissional",
+      "tipo_documento": "guia",
+      "fonte": "docs.google.com",
+      "licenca": "open_access"
+    }
+  },
+  {
+    "titulo": "Código de Conduta na Comunidade do Discord",
+    "autor": "Comunidade e Sucesso do Aluno",
+    "ano": 2026,
+    "url_pdf": "https://drive.google.com/uc?export=download&id=1C4qcuqy1bcypNNfUq5aN7f5HmP6-t7pn",
+    "resumo": "Estabelece as regras de convivência no servidor do Discord. Reforça que dúvidas de código devem ser discutidas com a comunidade e não enviadas ao EduBot, e proíbe explicitamente o envio de mensagens a professores pedindo extensão de prazos ou contatos pessoais.",
+    "data_insercao": "2026-08-31T19:07:00.000Z",
+    "status": "Pendente",
+    "embedding_status": "pending",
+    "metadata": {
+      "tema": [
+        "discord",
+        "comunidade",
+        "regras",
+        "codigo",
+        "contatos"
+      ],
+      "nivel": "basico",
+      "idioma": "pt",
+      "contexto_educacional": "formacao_profissional",
+      "tipo_documento": "regulamento",
+      "fonte": "docs.google.com",
+      "licenca": "open_access"
+    }
+  },
+  {
+    "titulo": "Regras de Interação com Professores e Monitores",
+    "autor": "Coordenação Pedagógica",
+    "ano": 2026,
+    "url_pdf": "https://drive.google.com/uc?export=download&id=1j7AeJgUOKNXqmrWpsvbIiyPRaTIV_5_v",
+    "resumo": "Define as diretrizes de comunicação acadêmica. Proíbe expressamente o compartilhamento de contatos pessoais de instrutores pelo EduBot. Reforça que apenas professores e monitores lidam com dúvidas de código, mas proíbe que eles negociem ou estendam prazos de entrega.",
+    "data_insercao": "2026-08-31T19:15:00.000Z",
+    "status": "Pendente",
+    "embedding_status": "pending",
+    "metadata": {
+      "tema": [
+        "comunicacao",
+        "professores",
+        "contatos",
+        "codigo",
+        "prazos"
+      ],
+      "nivel": "intermediario",
+      "idioma": "pt",
+      "contexto_educacional": "formacao_profissional",
+      "tipo_documento": "norma",
+      "fonte": "docs.google.com",
+      "licenca": "open_access"
+    }
+  },
+  {
+    "titulo": "Termos de Uso e Condições da Plataforma",
+    "autor": "Jurídico e Compliance",
+    "ano": 2026,
+    "url_pdf": "https://drive.google.com/uc?export=download&id=17ZkxgR657ulF4bYLcXz4vyX9qvRYNDFi",
+    "resumo": "Documento legal que formaliza as regras de conduta, direitos autorais e obrigações acadêmicas. Isenta a DevAcademy de corrigir erros de código dos alunos, reforça a proibição de estender prazos e orienta o fluxo via EduBot para reportar falhas como o Erro 500.",
+    "data_insercao": "2026-08-31T19:20:00.000Z",
+    "status": "Pendente",
+    "embedding_status": "pending",
+    "metadata": {
+      "tema": [
+        "termos_de_uso",
+        "regras",
+        "legal",
+        "prazos",
+        "responsabilidade"
+      ],
+      "nivel": "intermediario",
+      "idioma": "pt",
+      "contexto_educacional": "formacao_profissional",
+      "tipo_documento": "regulamento",
+      "fonte": "docs.google.com",
+      "licenca": "open_access"
+    }
+  },
+  {
+    "titulo": "Guia de Instalação de Ferramentas (VS Code, Node.js, Git)",
+    "autor": "Suporte Técnico e Operacional",
+    "ano": 2026,
+    "url_pdf": "https://drive.google.com/uc?export=download&id=1o0k2ei6h6ZQynn7i9oeGo15bRxUwFHjF",
+    "resumo": "Fornece instruções básicas para o download das ferramentas de desenvolvimento. Reforça explicitamente que a TI e o EduBot não dão suporte para a máquina local do aluno, não resolvem erros de terminal, e que problemas no computador pessoal não estendem prazos.",
+    "data_insercao": "2026-08-31T19:25:00.000Z",
+    "status": "Pendente",
+    "embedding_status": "pending",
+    "metadata": {
+      "tema": [
+        "instalacao",
+        "ferramentas",
+        "vscode",
+        "git",
+        "suporte"
+      ],
+      "nivel": "basico",
+      "idioma": "pt",
+      "contexto_educacional": "formacao_profissional",
+      "tipo_documento": "guia",
+      "fonte": "docs.google.com",
+      "licenca": "open_access"
+    }
+  },
+  {
+    "titulo": "Requisitos Mínimos de Hardware para os Bootcamps",
+    "autor": "Suporte Operacional",
+    "ano": 2026,
+    "url_pdf": "https://drive.google.com/uc?export=download&id=1vodqAejJbjRZUmOca_ILt9oINhLPjvkJ",
+    "resumo": "Lista as especificações de computador e internet exigidas para os cursos. Serve como base para o EduBot negar chamados de suporte técnico relacionados ao PC do aluno e reafirmar que problemas de hardware pessoal não garantem extensão de prazos.",
+    "data_insercao": "2026-08-31T19:35:00.000Z",
+    "status": "Pendente",
+    "embedding_status": "pending",
+    "metadata": {
+      "tema": [
+        "hardware",
+        "requisitos",
+        "suporte",
+        "prazos",
+        "infraestrutura"
+      ],
+      "nivel": "basico",
+      "idioma": "pt",
+      "contexto_educacional": "formacao_profissional",
+      "tipo_documento": "guia",
+      "fonte": "docs.google.com",
+      "licenca": "open_access"
+    }
+  },
+  {
+    "titulo": "Tutorial: Como criar e enviar o link do seu repositório",
+    "autor": "Coordenação Pedagógica",
+    "ano": 2026,
+    "url_pdf": "https://drive.google.com/uc?export=download&id=1_hNIHVo30Vq5dmn02Naz_6n7Ta36eCd2",
+    "resumo": "Ensina a criar repositórios públicos no GitHub. Delimita claramente que erros no uso do Git são problemas técnicos do aluno (sem suporte da TI ou do EduBot) e não justificam atrasos. Diferencia essas falhas de um Erro 500 na plataforma, que deve ser reportado.",
+    "data_insercao": "2026-08-31T19:40:00.000Z",
+    "status": "Pendente",
+    "embedding_status": "pending",
+    "metadata": {
+      "tema": [
+        "github",
+        "repositorio",
+        "git",
+        "entregas",
+        "suporte"
+      ],
+      "nivel": "basico",
+      "idioma": "pt",
+      "contexto_educacional": "formacao_profissional",
+      "tipo_documento": "guia",
+      "fonte": "docs.google.com",
+      "licenca": "open_access"
+    }
+  },
+  {
+    "titulo": "Guia de Padrões de Nomenclatura para Entrega de Trabalhos",
+    "autor": "Coordenação Pedagógica",
+    "ano": 2026,
+    "url_pdf": "https://drive.google.com/uc?export=download&id=18rMtNKCYpAVZnxHwbZDNfNRZxcBE9jib",
+    "resumo": "Define o padrão kebab-case para repositórios e boas práticas de código. Diferencia o Erro 404 (link do aluno quebrado no GitHub, sem suporte/extensão de prazo) do Erro 500 (bug da DevAcademy), treinando o EduBot para negar suporte em casos de links inválidos.",
+    "data_insercao": "2026-08-31T19:45:00.000Z",
+    "status": "Pendente",
+    "embedding_status": "pending",
+    "metadata": {
+      "tema": [
+        "padroes",
+        "nomenclatura",
+        "github",
+        "regras",
+        "codigo"
+      ],
+      "nivel": "intermediario",
+      "idioma": "pt",
+      "contexto_educacional": "formacao_profissional",
+      "tipo_documento": "guia",
+      "fonte": "docs.google.com",
+      "licenca": "open_access"
+    }
+  },
+  {
+    "titulo": "Dicas de Organização de Estudos para Transição de Carreira",
+    "autor": "Sucesso do Aluno",
+    "ano": 2026,
+    "url_pdf": "https://drive.google.com/uc?export=download&id=1saXx9Bge5zkiaEuxbjxkzoSsUFDOM3fl",
+    "resumo": "Material de apoio com tom encorajador para alunos iniciantes. Reforça que o EduBot é o canal amigável para consultar prazos, mas lembra que o bot não resolve código e que as datas de entrega continuam sendo inflexíveis.",
+    "data_insercao": "2026-08-31T19:50:00.000Z",
+    "status": "Pendente",
+    "embedding_status": "pending",
+    "metadata": {
+      "tema": [
+        "estudos",
+        "carreira",
+        "dicas",
+        "organizacao",
+        "regras"
+      ],
+      "nivel": "basico",
+      "idioma": "pt",
+      "contexto_educacional": "formacao_profissional",
+      "tipo_documento": "guia",
+      "fonte": "docs.google.com",
+      "licenca": "open_access"
+    }
+  }
+]
